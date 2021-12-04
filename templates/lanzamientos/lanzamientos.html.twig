@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LanzamientosController!
+{% endblock %}
+
+{% block body %}
+	{{ include('navbar.html.twig') }}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
+
+	<div class="container mt-5">
+		<div class="row animated fadeIn">
+			<div class="col">
+				<h1>{{ title }}</h1>
+			</div>
+			<div class="col text-right">
+				<button onclick="location.href='{{ path('home') }}'" class="btn btn-outline-danger">Regresar</button>
+			</div>
+		</div>
+		<div class="card-columns">
+			{% for news in lanzamientos %}
+				{% for artista in news.artists %}
+					<a href="{{ path('artista', {id: artista.id }) }}">
+						<div class="card">
+							<img src="{{ news.images[0]['url'] }}" class="card-img-top" alt="...">
+							<div class="card-body">
+								<h5 class="card-title">{{ artista.name | upper}}</h5>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
